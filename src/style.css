@@ -2097,8 +2097,21 @@ select.form-control option {
 }
 
 /* ==========================================================================
-   RESPONSIVE MEDIA QUERIES
+   RESPONSIVE MEDIA QUERIES & MOBILE OVERHAUL
    ========================================================================== */
+
+/* Universal Overflow & Layout Guard */
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 @media (max-width: 1024px) {
   .aeo-body {
     grid-template-columns: 1fr;
@@ -2109,40 +2122,413 @@ select.form-control option {
   .footer-container {
     grid-template-columns: 1fr 1fr;
   }
-}
-
-@media (max-width: 768px) {
-  .desktop-nav {
-    display: none;
-  }
-  .mobile-toggle {
-    display: block;
-  }
-  .hero-trust-bar {
-    grid-template-columns: 1fr 1fr;
-  }
-  .aeo-grid-facts {
-    grid-template-columns: 1fr;
-  }
-  .form-row {
-    grid-template-columns: 1fr;
-  }
   .showcase-grid {
     grid-template-columns: 1fr;
   }
-  .contact-fast-links {
-    display: none;
-  }
-  .footer-container {
-    grid-template-columns: 1fr;
-  }
 }
 
-@media (max-width: 480px) {
-  .hero-trust-bar {
-    grid-template-columns: 1fr;
+@media (max-width: 768px) {
+  /* Navigation & Announcement Bar */
+  .desktop-nav {
+    display: none !important;
   }
+  
+  .top-announcement-bar {
+    font-size: 0.72rem;
+    padding: 0.4rem 0.5rem;
+    text-align: center;
+  }
+
+  .top-bar-content {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .contact-fast-links {
+    display: none !important;
+  }
+
+  .main-header {
+    height: auto;
+  }
+
+  .header-container {
+    height: 64px;
+    padding: 0 1rem;
+  }
+
+  .brand-logo {
+    gap: 0.6rem;
+  }
+
+  .brand-logo-img {
+    width: 42px;
+    height: 42px;
+  }
+
+  .brand-title {
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+  }
+
+  .brand-subtitle {
+    font-size: 0.58rem;
+  }
+
+  .brand-location {
+    display: none !important;
+  }
+
+  /* Crucial: Hide bulky quote button in header on mobile to prevent overlapping brand logo */
+  #open-quote-modal-nav {
+    display: none !important;
+  }
+
+  .mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border-radius: var(--radius-md);
+    font-size: 1.25rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--color-border);
+  }
+
+  /* Section Spacing & Headers */
+  .services-section,
+  .showcase-section,
+  .fleet-section,
+  .areas-section,
+  .faq-section,
+  .estimator-section {
+    padding: 3.5rem 0;
+  }
+
+  .section-header {
+    margin-bottom: 2rem;
+  }
+
+  .section-title {
+    font-size: 1.85rem;
+  }
+
+  .section-lead {
+    font-size: 0.95rem;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    min-height: auto;
+    padding: 2.75rem 0 3.25rem;
+  }
+
+  .hero-logo-emblem {
+    width: 88px;
+    height: 88px;
+  }
+
+  .hero-tagline-badge {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.75rem;
+    line-height: 1.3;
+    text-align: center;
+    max-width: 95%;
+  }
+
+  .hero-heading {
+    font-size: clamp(1.9rem, 6.5vw, 2.5rem);
+    line-height: 1.18;
+  }
+
+  .hero-lead {
+    font-size: 0.975rem;
+    line-height: 1.6;
+    padding: 0 0.25rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+    margin-bottom: 2.25rem;
+  }
+
   .hero-cta-group .btn {
     width: 100%;
   }
+
+  .hero-trust-bar {
+    grid-template-columns: 1fr;
+    padding: 1.15rem 1rem;
+    gap: 0.9rem;
+  }
+
+  /* AEO Direct Answer Section */
+  .aeo-snapshot-section {
+    padding: 1.5rem 0;
+    margin-top: 0;
+  }
+
+  .aeo-card {
+    padding: 1.25rem 1rem;
+    border-left-width: 3px;
+  }
+
+  .aeo-header {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .aeo-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .aeo-title {
+    font-size: 1.2rem;
+  }
+
+  .aeo-body {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .aeo-text-column p {
+    font-size: 0.925rem;
+    margin-bottom: 1rem;
+  }
+
+  .aeo-grid-facts {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+
+  .callout-quote-box {
+    padding: 1.25rem 1rem;
+  }
+
+  /* Interactive Cost Estimator */
+  .estimator-wrapper {
+    padding: 1.25rem 1rem;
+    gap: 1.75rem;
+    border-radius: var(--radius-md);
+  }
+
+  .service-selector-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+  }
+
+  .service-selector-grid .selector-card:last-child {
+    grid-column: span 2;
+  }
+
+  .selector-card {
+    padding: 0.85rem 0.5rem;
+  }
+
+  .selector-card i {
+    font-size: 1.35rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .selector-name {
+    font-size: 0.825rem;
+  }
+
+  .selector-unit {
+    font-size: 0.68rem;
+  }
+
+  .slider-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .slider-value-display {
+    align-self: flex-start;
+    font-size: 1.1rem;
+  }
+
+  .radio-pill {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.825rem;
+  }
+
+  .estimator-result-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .result-price {
+    font-size: 1.75rem;
+  }
+
+  .breakdown-row {
+    font-size: 0.825rem;
+  }
+
+  /* Services Grid */
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .service-icon-banner {
+    padding: 1.25rem 1.25rem 0.75rem;
+  }
+
+  .service-body {
+    padding: 0 1.25rem 1.25rem;
+  }
+
+  .service-title {
+    font-size: 1.2rem;
+  }
+
+  /* Showcase / Projects */
+  .showcase-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .showcase-content {
+    padding: 1.25rem 1rem;
+  }
+
+  .showcase-title {
+    font-size: 1.2rem;
+  }
+
+  /* Fleet Explorer */
+  .fleet-tabs {
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+  }
+
+  .fleet-tab {
+    padding: 0.6rem 0.9rem;
+    font-size: 0.8rem;
+  }
+
+  .fleet-display-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .fleet-name {
+    font-size: 1.4rem;
+  }
+
+  .fleet-description {
+    font-size: 0.925rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .fleet-features-list {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .fleet-hire-box {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .fleet-hire-box .btn {
+    width: 100%;
+  }
+
+  /* Service Areas */
+  .areas-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .area-card {
+    padding: 1.25rem 1rem;
+  }
+
+  /* FAQ Accordion */
+  .faq-question {
+    padding: 1rem 1.15rem;
+    font-size: 0.925rem;
+  }
+
+  .faq-answer p {
+    padding: 0 1.15rem 1.15rem;
+    font-size: 0.875rem;
+  }
+
+  /* Final CTA */
+  .cta-banner-section {
+    padding: 3.5rem 0;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .cta-buttons .btn {
+    width: 100%;
+  }
+
+  /* Modal Dialog */
+  .modal-dialog {
+    padding: 1.5rem 1.15rem;
+    max-height: 92vh;
+    width: 95%;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  /* Footer & Tech Aid Badge */
+  .main-footer {
+    padding: 3.5rem 0 0;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .footer-powered {
+    padding: 0 0 1.5rem;
+    justify-content: center;
+  }
+
+  .footer-bottom-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.85rem;
+  }
+
+  .footer-credits {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .footer-credits__sep {
+    display: none;
+  }
 }
+
