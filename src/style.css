@@ -1518,6 +1518,419 @@ button, input, select, textarea {
 }
 
 /* ==========================================================================
+   GOOGLE MY BUSINESS PROFILE & INTERACTIVE MAP SECTION
+   ========================================================================== */
+.google-business-section {
+  padding: 6rem 0;
+  background: linear-gradient(180deg, var(--color-bg) 0%, rgba(20, 26, 33, 0.95) 50%, var(--color-bg) 100%);
+  border-top: 1px solid var(--color-border);
+}
+
+.google-kicker-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(66, 133, 244, 0.1);
+  border: 1px solid rgba(66, 133, 244, 0.35);
+  padding: 0.35rem 0.85rem;
+  border-radius: 50px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #60A5FA;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.85rem;
+}
+
+.google-icon-sm {
+  flex-shrink: 0;
+}
+
+/* Google Profile Card */
+.gmb-profile-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-lg);
+  margin-top: 2.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.gmb-profile-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #4285F4 0%, #EA4335 33%, #FBBC05 66%, #34A853 100%);
+}
+
+.gmb-profile-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.gmb-identity {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.gmb-logo-wrapper {
+  position: relative;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: #000000;
+  border: 2px solid var(--color-primary);
+  flex-shrink: 0;
+}
+
+.gmb-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.gmb-google-badge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 24px;
+  height: 24px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.gmb-title-area {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.gmb-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.gmb-business-name {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.gmb-verified-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #4ADE80;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  padding: 0.2rem 0.6rem;
+  border-radius: 50px;
+}
+
+.gmb-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.gmb-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #4ADE80;
+  font-weight: 600;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22C55E;
+  box-shadow: 0 0 6px #22C55E;
+}
+
+.gmb-rating-summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.15rem;
+}
+
+.gmb-score {
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: #FFFFFF;
+}
+
+.gmb-stars {
+  display: flex;
+  gap: 2px;
+  color: #F59E0B;
+  font-size: 0.95rem;
+}
+
+.gmb-review-count {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.gmb-actions-bar {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.gmb-attributes-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  padding-top: 1.25rem;
+  margin-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.gmb-attr-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.gmb-attr-item i {
+  color: var(--color-primary);
+}
+
+/* Google Reviews Grid */
+.gmb-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.gmb-review-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+}
+
+.gmb-review-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(224, 90, 43, 0.5);
+  box-shadow: var(--shadow-md);
+}
+
+.review-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.reviewer-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #FFFFFF;
+  flex-shrink: 0;
+}
+
+.reviewer-avatar-1 { background: #EA4335; }
+.reviewer-avatar-2 { background: #4285F4; }
+.reviewer-avatar-3 { background: #34A853; }
+
+.reviewer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  flex-grow: 1;
+}
+
+.reviewer-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #FFFFFF;
+}
+
+.reviewer-badge {
+  font-size: 0.75rem;
+  color: var(--color-text-dim);
+}
+
+.review-source {
+  flex-shrink: 0;
+}
+
+.review-stars-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.85rem 0 0.6rem;
+}
+
+.review-date {
+  font-size: 0.75rem;
+  color: var(--color-text-dim);
+}
+
+.review-text {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--color-cream);
+  font-style: italic;
+  margin-bottom: 1.15rem;
+  flex-grow: 1;
+}
+
+.review-service-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  background: rgba(224, 90, 43, 0.08);
+  border: 1px solid rgba(224, 90, 43, 0.2);
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  align-self: flex-start;
+}
+
+/* Map Wrapper & Floating Info Card */
+.gmb-map-wrapper {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  height: 480px;
+  background: #141A21;
+}
+
+.map-container-frame {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.google-map-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  filter: contrast(1.05) brightness(0.92);
+}
+
+.map-floating-card {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  max-width: 360px;
+  width: calc(100% - 3rem);
+  background: rgba(14, 19, 24, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-lg);
+  z-index: 2;
+}
+
+.map-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.map-card-header i {
+  font-size: 1.25rem;
+  margin-top: 0.15rem;
+}
+
+.map-card-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.map-card-sub {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin: 0.15rem 0 0;
+}
+
+.map-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+}
+
+.detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.detail-row i {
+  color: var(--color-primary);
+  width: 14px;
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+.detail-row a {
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.detail-row a:hover {
+  color: var(--color-primary);
+}
+
+.map-card-actions {
+  margin-top: 0.25rem;
+}
+
+/* ==========================================================================
    FAQ SECTION (AEO ACCORDION)
    ========================================================================== */
 .faq-section {
@@ -2413,6 +2826,7 @@ html, body {
   .showcase-section,
   .fleet-section,
   .areas-section,
+  .google-business-section,
   .faq-section,
   .estimator-section {
     padding: 3.5rem 0;
@@ -2671,6 +3085,77 @@ html, body {
 
   .area-card {
     padding: 1.25rem 1rem;
+  }
+
+  /* Google My Business & Map */
+  .google-business-section {
+    padding: 3.5rem 0;
+  }
+
+  .gmb-profile-card {
+    padding: 1.5rem 1.15rem;
+    margin-top: 1.75rem;
+  }
+
+  .gmb-profile-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .gmb-identity {
+    gap: 1rem;
+  }
+
+  .gmb-logo-wrapper {
+    width: 58px;
+    height: 58px;
+  }
+
+  .gmb-business-name {
+    font-size: 1.15rem;
+  }
+
+  .gmb-actions-bar {
+    width: 100%;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .gmb-actions-bar .btn {
+    width: 100%;
+  }
+
+  .gmb-attributes-row {
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .gmb-reviews-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .gmb-map-wrapper {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .google-map-iframe {
+    height: 320px;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  .map-floating-card {
+    position: static;
+    max-width: 100%;
+    width: 100%;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
   }
 
   /* FAQ Accordion */
