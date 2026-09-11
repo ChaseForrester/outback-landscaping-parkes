@@ -318,22 +318,33 @@ button, input, select, textarea {
   gap: 0.85rem;
 }
 
-.brand-icon-wrapper {
+.brand-logo-img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(226, 109, 56, 0.45);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5), 0 0 12px rgba(226, 109, 56, 0.2);
+  transition: transform var(--transition-fast);
+}
+
+.brand-logo:hover .brand-logo-img {
+  transform: scale(1.05);
+}
+
+.brand-logo-img-sm {
   width: 44px;
   height: 44px;
-  border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #FFF;
-  font-size: 1.3rem;
-  box-shadow: 0 4px 12px rgba(226, 109, 56, 0.4);
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(226, 109, 56, 0.45);
 }
 
 .brand-text {
   display: flex;
   flex-direction: column;
+  text-align: center;
+  align-items: center;
 }
 
 .brand-title {
@@ -526,7 +537,41 @@ button, input, select, textarea {
 }
 
 .hero-content {
-  max-width: 820px;
+  max-width: 860px;
+}
+
+.hero-content-centered {
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-logo-wrapper {
+  margin-bottom: 1.25rem;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-logo-emblem {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(226, 109, 56, 0.6);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 28px rgba(226, 109, 56, 0.4);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: floatLogo 6s ease-in-out infinite;
+}
+
+@keyframes floatLogo {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+.hero-logo-emblem:hover {
+  transform: scale(1.08) rotate(2deg);
 }
 
 .hero-tagline-badge {
@@ -552,6 +597,7 @@ button, input, select, textarea {
   color: #FFFFFF;
   margin-bottom: 1.5rem;
   letter-spacing: -0.5px;
+  text-align: center;
 }
 
 .hero-lead {
@@ -560,12 +606,16 @@ button, input, select, textarea {
   line-height: 1.7;
   margin-bottom: 2.25rem;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-  max-width: 740px;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 .hero-cta-group {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1.25rem;
   flex-wrap: wrap;
   margin-bottom: 3.5rem;
@@ -1672,16 +1722,12 @@ button, input, select, textarea {
   border-bottom: 1px solid var(--color-border);
 }
 
-.modal-icon {
-  width: 46px;
-  height: 46px;
-  background: rgba(226, 109, 56, 0.15);
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-primary);
-  font-size: 1.3rem;
+.modal-logo-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(226, 109, 56, 0.4);
 }
 
 .modal-title {
@@ -1806,13 +1852,16 @@ select.form-control option {
 .footer-logo {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
   margin-bottom: 1.25rem;
 }
 
-.footer-logo i {
-  color: var(--color-primary);
-  font-size: 1.5rem;
+.footer-logo-img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(226, 109, 56, 0.4);
 }
 
 .footer-bio {
