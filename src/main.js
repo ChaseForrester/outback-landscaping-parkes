@@ -452,6 +452,9 @@ function initQuoteModal() {
     }
   });
 
+  // File Upload Manager for Modal
+  const modalUploader = setupFileUpload('modal-dropzone', 'form-photos', 'modal-file-preview');
+
   // Form Submission
   if (form) {
     form.addEventListener('submit', async (e) => {
@@ -465,10 +468,11 @@ function initQuoteModal() {
       const location = document.getElementById('form-location')?.value?.trim() || '';
       const service = document.getElementById('form-service')?.value || '';
       const details = document.getElementById('form-details')?.value?.trim() || '';
+      const attachedFiles = modalUploader.getFiles();
 
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending Request...';
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Uploading &amp; Sending...';
       }
 
       const payload = {
@@ -479,6 +483,7 @@ function initQuoteModal() {
         "Property Location": location,
         "Service Required": service,
         "Project Scope & Details": details || "(No extra scope details)",
+        "Attachments Count": attachedFiles.length > 0 ? `${attachedFiles.length} file(s) attached` : "None",
         "Submitted At": new Date().toLocaleString("en-AU", { timeZone: "Australia/Sydney" }),
         "Logo Badge": "https://raw.githubusercontent.com/ChaseForrester/outback-landscaping-parkes/main/public/images/logo.png",
         "_subject": `🚜 New Inspection Request: ${service} - ${name} (Outback Landscaping)`,
@@ -487,7 +492,7 @@ function initQuoteModal() {
         "_captcha": "false"
       };
 
-      await sendFormEmail(payload);
+      await sendFormEmail(payload, attachedFiles);
 
       if (submitBtn) {
         submitBtn.disabled = false;
@@ -497,8 +502,9 @@ function initQuoteModal() {
       form.style.display = 'none';
       if (successState) successState.style.display = 'block';
 
-      showToast(`Thank you ${name}! Your request was emailed to our team.`);
+      showToast(`Thank you ${name}! Your request was emailed with ${attachedFiles.length} photo(s).`);
       form.reset();
+      modalUploader.reset();
     });
   }
 }
@@ -511,6 +517,8 @@ function initQuickForm() {
   const successMsg = document.getElementById('quick-success-msg');
   if (!quickForm) return;
 
+  const quickUploader = setupFileUpload('quick-dropzone', 'quick-photos', 'quick-file-preview');
+
   quickForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const submitBtn = document.getElementById('quick-submit-btn');
@@ -520,10 +528,11 @@ function initQuickForm() {
     const phone = document.getElementById('quick-phone')?.value?.trim() || '';
     const location = document.getElementById('quick-location')?.value?.trim() || '';
     const service = document.getElementById('quick-service')?.value || '';
+    const attachedFiles = quickUploader.getFiles();
 
     if (submitBtn) {
       submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Uploading &amp; Sending...';
     }
 
     const payload = {
@@ -533,6 +542,7 @@ function initQuickForm() {
       "Property Location": location,
       "Primary Service": service,
       "Inquiry Type": "Fast Inspection Request (CTA Section)",
+      "Attachments Count": attachedFiles.length > 0 ? `${attachedFiles.length} file(s) attached` : "None",
       "Submitted At": new Date().toLocaleString("en-AU", { timeZone: "Australia/Sydney" }),
       "Logo Badge": "https://raw.githubusercontent.com/ChaseForrester/outback-landscaping-parkes/main/public/images/logo.png",
       "_subject": `⚡ Fast Inspection Request: ${service} - ${name} (Outback Landscaping)`,
@@ -541,7 +551,7 @@ function initQuickForm() {
       "_captcha": "false"
     };
 
-    await sendFormEmail(payload);
+    await sendFormEmail(payload, attachedFiles);
 
     if (submitBtn) {
       submitBtn.disabled = false;
@@ -549,26 +559,163 @@ function initQuickForm() {
     }
 
     if (successMsg) successMsg.style.display = 'flex';
-    showToast(`Thanks ${name}! Inspection request sent to hello@techaidaustralia.com.au`);
+    showToast(`Thanks ${name}! Inspection request sent with ${attachedFiles.length} photo(s).`);
     quickForm.reset();
+    quickUploader.reset();
   });
 }
 
 /* ==========================================================================
-   7. FORM SUBMIT EMAIL DISPATCHER
+   7. FILE ATTACHMENT MANAGER (DRAG & DROP + THUMBNAILS)
+   ========================================================================== */
+function setupFileUpload(dropzoneId, inputId, previewId) {
+  const dropzone = document.getElementById(dropzoneId);
+  const input = document.getElementById(inputId);
+  const preview = document.getElementById(previewId);
+  if (!dropzone || !input || !preview) return { getFiles: () => [], reset: () => {} };
+
+  let filesList = [];
+
+  const updatePreview = () => {
+    preview.innerHTML = '';
+    filesList.forEach((file, index) => {
+      const chip = document.createElement('div');
+      chip.className = 'preview-chip';
+
+      const isImage = file.type.startsWith('image/');
+      let thumbHtml = '';
+      if (isImage) {
+        const objectUrl = URL.createObjectURL(file);
+        thumbHtml = `<img src="${objectUrl}" class="preview-thumb" alt="Preview" />`;
+      } else {
+        thumbHtml = `<div class="preview-thumb-icon"><i class="fa-solid fa-file-pdf"></i></div>`;
+      }
+
+      const sizeKb = Math.round(file.size / 1024);
+      const sizeStr = sizeKb > 1024 ? (sizeKb / 1024).toFixed(1) + ' MB' : sizeKb + ' KB';
+
+      chip.innerHTML = `
+        ${thumbHtml}
+        <div class="preview-info">
+          <span class="preview-name" title="${escapeHtml(file.name)}">${escapeHtml(file.name)}</span>
+          <span class="preview-size">${sizeStr}</span>
+        </div>
+        <button type="button" class="preview-remove-btn" title="Remove file" aria-label="Remove file">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      `;
+
+      chip.querySelector('.preview-remove-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        filesList.splice(index, 1);
+        updatePreview();
+      });
+
+      preview.appendChild(chip);
+    });
+  };
+
+  const handleFiles = (incomingFiles) => {
+    const valid = Array.from(incomingFiles).filter(f => {
+      if (f.size > 15 * 1024 * 1024) {
+        showToast(`"${f.name}" exceeds 15MB limit.`);
+        return false;
+      }
+      return true;
+    });
+
+    const maxAllowed = 6;
+    const availableSlots = maxAllowed - filesList.length;
+    if (availableSlots <= 0) {
+      showToast(`Maximum ${maxAllowed} photos can be attached.`);
+      return;
+    }
+
+    filesList = [...filesList, ...valid.slice(0, availableSlots)];
+    updatePreview();
+  };
+
+  dropzone.addEventListener('click', () => {
+    input.click();
+  });
+
+  input.addEventListener('change', () => {
+    if (input.files && input.files.length) {
+      handleFiles(input.files);
+      input.value = '';
+    }
+  });
+
+  ['dragenter', 'dragover'].forEach(name => {
+    dropzone.addEventListener(name, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropzone.classList.add('drag-over');
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(name => {
+    dropzone.addEventListener(name, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropzone.classList.remove('drag-over');
+    });
+  });
+
+  dropzone.addEventListener('drop', (e) => {
+    if (e.dataTransfer && e.dataTransfer.files) {
+      handleFiles(e.dataTransfer.files);
+    }
+  });
+
+  return {
+    getFiles: () => filesList,
+    reset: () => {
+      filesList = [];
+      updatePreview();
+    }
+  };
+}
+
+function escapeHtml(str) {
+  return str.replace(/[&<>'"]/g, 
+    tag => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      "'": '&#39;',
+      '"': '&quot;'
+    }[tag] || tag)
+  );
+}
+
+/* ==========================================================================
+   8. FORM SUBMIT EMAIL DISPATCHER (FORMSUBMIT.CO)
    ========================================================================== */
 const RECIPIENT_EMAIL = "hello@techaidaustralia.com.au";
 
-async function sendFormEmail(payload) {
+async function sendFormEmail(payload, files = []) {
   try {
+    const formData = new FormData();
+
+    for (const [key, value] of Object.entries(payload)) {
+      formData.append(key, value);
+    }
+
+    if (files && files.length > 0) {
+      files.forEach((file) => {
+        formData.append('attachment', file, file.name);
+      });
+    }
+
     const res = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(RECIPIENT_EMAIL)}`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify(payload)
+      body: formData
     });
+
     const data = await res.json();
     console.log('FormSubmit Response:', data);
     return data;
@@ -579,7 +726,7 @@ async function sendFormEmail(payload) {
 }
 
 /* ==========================================================================
-   8. TOAST NOTIFICATION HELPER
+   9. TOAST NOTIFICATION HELPER
    ========================================================================== */
 function showToast(message) {
   const toast = document.getElementById('toast');
@@ -592,4 +739,5 @@ function showToast(message) {
     toast.classList.remove('show');
   }, 5000);
 }
+
 

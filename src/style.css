@@ -1690,6 +1690,10 @@ button, input, select, textarea {
   gap: 1rem;
 }
 
+.quick-form-grid .full-col {
+  grid-column: span 2;
+}
+
 .quick-form-grid button {
   grid-column: span 2;
   margin-top: 0.5rem;
@@ -1836,6 +1840,156 @@ button, input, select, textarea {
 select.form-control option {
   background: #141A21;
   color: #FFFFFF;
+}
+
+/* File Upload & Dropzone Components */
+.file-upload-group {
+  margin-bottom: 1.25rem;
+}
+
+.file-input-hidden {
+  display: none !important;
+}
+
+.file-dropzone {
+  border: 2px dashed rgba(224, 90, 43, 0.45);
+  background: rgba(224, 90, 43, 0.04);
+  border-radius: var(--radius-md);
+  padding: 1.15rem 1.25rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.file-dropzone:hover,
+.file-dropzone:focus-visible,
+.file-dropzone.drag-over {
+  border-color: var(--color-primary);
+  background: rgba(224, 90, 43, 0.1);
+  box-shadow: 0 0 15px rgba(224, 90, 43, 0.15);
+  transform: translateY(-1px);
+}
+
+.dropzone-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  pointer-events: none;
+}
+
+.dropzone-icon {
+  font-size: 1.85rem;
+  color: var(--color-primary);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.file-dropzone:hover .dropzone-icon,
+.file-dropzone.drag-over .dropzone-icon {
+  transform: scale(1.12);
+}
+
+.dropzone-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  text-align: left;
+}
+
+.dropzone-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.dropzone-sub {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  line-height: 1.35;
+}
+
+.file-preview-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.85rem;
+}
+
+.preview-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 0.65rem;
+  max-width: 100%;
+  animation: fadeIn 0.2s ease;
+}
+
+.preview-thumb {
+  width: 38px;
+  height: 38px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+}
+
+.preview-thumb-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 4px;
+  background: rgba(239, 68, 68, 0.15);
+  color: #EF4444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.preview-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: 180px;
+}
+
+.preview-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.preview-size {
+  font-size: 0.7rem;
+  color: var(--color-text-dim);
+}
+
+.preview-remove-btn {
+  background: transparent;
+  border: none;
+  color: #EF4444;
+  cursor: pointer;
+  padding: 0.25rem 0.45rem;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+}
+
+.preview-remove-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #F87171;
+  transform: scale(1.1);
 }
 
 .form-guarantee {
@@ -2555,6 +2709,7 @@ html, body {
     gap: 0.75rem;
   }
 
+  .quick-form-grid .full-col,
   .quick-form-grid button {
     grid-column: span 1;
   }
