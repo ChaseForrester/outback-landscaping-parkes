@@ -987,12 +987,52 @@
             Speak directly with our Parkes team today. Get honest local advice, free site inspections, and competitive fixed-price quotes.
           </p>
           <div class="cta-buttons">
-            <button class="btn btn-primary btn-lg" id="final-quote-cta">
-              <i class="fa-solid fa-clipboard-check"></i> Request Free Site Visit
+            <button class="btn btn-secondary btn-lg" id="final-quote-cta">
+              <i class="fa-solid fa-clipboard-check"></i> Open Full Quote Calculator
             </button>
             <a href="tel:0428193847" class="btn btn-secondary btn-lg">
               <i class="fa-solid fa-phone"></i> Call 0428 193 847
             </a>
+          </div>
+
+          <div class="cta-quick-form-wrapper">
+            <form class="cta-quick-form" id="quick-contact-form">
+              <h3 class="quick-form-title"><i class="fa-solid fa-bolt-lightning text-accent"></i> Fast On-Site Inspection Request</h3>
+              <p class="quick-form-sub">Submissions are sent directly to <strong>hello@techaidaustralia.com.au</strong> for prompt booking.</p>
+              <div class="quick-form-grid">
+                <div class="form-group">
+                  <label for="quick-name">Your Full Name *</label>
+                  <input type="text" id="quick-name" class="form-control" placeholder="e.g. Sarah Connor" required>
+                </div>
+                <div class="form-group">
+                  <label for="quick-phone">Phone Number *</label>
+                  <input type="tel" id="quick-phone" class="form-control" placeholder="e.g. 0428 123 456" required>
+                </div>
+                <div class="form-group">
+                  <label for="quick-location">Property Suburb / Location *</label>
+                  <input type="text" id="quick-location" class="form-control" placeholder="e.g. Parkes (Acreage)" required>
+                </div>
+                <div class="form-group">
+                  <label for="quick-service">Primary Service Required *</label>
+                  <select id="quick-service" class="form-control" required>
+                    <option value="House & Shed Pad Site Cuts">House &amp; Shed Pad Site Cuts</option>
+                    <option value="Rural Driveway Construction">Rural Driveways &amp; Access Roads</option>
+                    <option value="Laser Levelling & Arenas">Laser Levelling &amp; Horse Arenas</option>
+                    <option value="Retaining Walls & Terracing">Retaining Walls &amp; Terraces</option>
+                    <option value="Dam Excavation & Desilting">Dam Excavation &amp; Desilting</option>
+                    <option value="Turf Laying & Landscaping">Sir Walter Turf &amp; Landscaping</option>
+                    <option value="Emergency Storm & Culvert Repair">Emergency Storm &amp; Culvert Repair</option>
+                    <option value="Machinery Wet Hire">Machinery Wet Hire</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg" id="quick-submit-btn">
+                  <i class="fa-solid fa-paper-plane"></i> Send Fast Request
+                </button>
+              </div>
+              <div id="quick-success-msg" class="quick-success-alert" style="display: none;">
+                <i class="fa-solid fa-circle-check"></i> Thank you! Your inspection request has been sent to hello@techaidaustralia.com.au. We will call you within 24 business hours.
+              </div>
+            </form>
           </div>
         </div>
       </div>

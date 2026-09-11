@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFleetTabs();
   initFaqAccordion();
   initQuoteModal();
+  initQuickForm();
 });
 
 /* ==========================================================================
@@ -453,25 +454,132 @@ function initQuoteModal() {
 
   // Form Submission
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const name = document.getElementById('form-name').value;
-      const phone = document.getElementById('form-phone').value;
-      const service = document.getElementById('form-service').value;
+      const submitBtn = document.getElementById('submit-quote-btn');
+      const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
 
-      // In production, would send to backend or webhook
-      console.log('Quote Request Submitted:', { name, phone, service });
+      const name = document.getElementById('form-name')?.value?.trim() || '';
+      const phone = document.getElementById('form-phone')?.value?.trim() || '';
+      const email = document.getElementById('form-email')?.value?.trim() || '';
+      const location = document.getElementById('form-location')?.value?.trim() || '';
+      const service = document.getElementById('form-service')?.value || '';
+      const details = document.getElementById('form-details')?.value?.trim() || '';
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending Request...';
+      }
+
+      const payload = {
+        "Company": "Outback Landscaping and Excavations (Parkes NSW)",
+        "Customer Name": name,
+        "Contact Phone": phone,
+        "Customer Email": email || "(Not provided)",
+        "Property Location": location,
+        "Service Required": service,
+        "Project Scope & Details": details || "(No extra scope details)",
+        "Submitted At": new Date().toLocaleString("en-AU", { timeZone: "Australia/Sydney" }),
+        "Logo Badge": "https://raw.githubusercontent.com/ChaseForrester/outback-landscaping-parkes/main/public/images/logo.png",
+        "_subject": `🚜 New Inspection Request: ${service} - ${name} (Outback Landscaping)`,
+        "_replyto": email || phone,
+        "_template": "table",
+        "_captcha": "false"
+      };
+
+      await sendFormEmail(payload);
+
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnHtml;
+      }
 
       form.style.display = 'none';
       if (successState) successState.style.display = 'block';
 
-      showToast(`Thank you ${name}! Your quote request has been received.`);
+      showToast(`Thank you ${name}! Your request was emailed to our team.`);
+      form.reset();
     });
   }
 }
 
 /* ==========================================================================
-   6. TOAST NOTIFICATION HELPER
+   6. QUICK CONTACT FORM (CTA SECTION)
+   ========================================================================== */
+function initQuickForm() {
+  const quickForm = document.getElementById('quick-contact-form');
+  const successMsg = document.getElementById('quick-success-msg');
+  if (!quickForm) return;
+
+  quickForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submitBtn = document.getElementById('quick-submit-btn');
+    const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
+
+    const name = document.getElementById('quick-name')?.value?.trim() || '';
+    const phone = document.getElementById('quick-phone')?.value?.trim() || '';
+    const location = document.getElementById('quick-location')?.value?.trim() || '';
+    const service = document.getElementById('quick-service')?.value || '';
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
+    }
+
+    const payload = {
+      "Company": "Outback Landscaping and Excavations (Parkes NSW)",
+      "Customer Name": name,
+      "Contact Phone": phone,
+      "Property Location": location,
+      "Primary Service": service,
+      "Inquiry Type": "Fast Inspection Request (CTA Section)",
+      "Submitted At": new Date().toLocaleString("en-AU", { timeZone: "Australia/Sydney" }),
+      "Logo Badge": "https://raw.githubusercontent.com/ChaseForrester/outback-landscaping-parkes/main/public/images/logo.png",
+      "_subject": `⚡ Fast Inspection Request: ${service} - ${name} (Outback Landscaping)`,
+      "_replyto": phone,
+      "_template": "table",
+      "_captcha": "false"
+    };
+
+    await sendFormEmail(payload);
+
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnHtml;
+    }
+
+    if (successMsg) successMsg.style.display = 'flex';
+    showToast(`Thanks ${name}! Inspection request sent to hello@techaidaustralia.com.au`);
+    quickForm.reset();
+  });
+}
+
+/* ==========================================================================
+   7. FORM SUBMIT EMAIL DISPATCHER
+   ========================================================================== */
+const RECIPIENT_EMAIL = "hello@techaidaustralia.com.au";
+
+async function sendFormEmail(payload) {
+  try {
+    const res = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(RECIPIENT_EMAIL)}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    console.log('FormSubmit Response:', data);
+    return data;
+  } catch (err) {
+    console.warn('FormSubmit Request Fallback:', err);
+    return { success: false, error: err.message };
+  }
+}
+
+/* ==========================================================================
+   8. TOAST NOTIFICATION HELPER
    ========================================================================== */
 function showToast(message) {
   const toast = document.getElementById('toast');
@@ -482,5 +590,6 @@ function showToast(message) {
 
   setTimeout(() => {
     toast.classList.remove('show');
-  }, 4500);
+  }, 5000);
 }
+

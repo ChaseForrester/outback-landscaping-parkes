@@ -1652,6 +1652,63 @@ button, input, select, textarea {
   flex-wrap: wrap;
 }
 
+.cta-quick-form-wrapper {
+  max-width: 720px;
+  margin: 3rem auto 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem;
+  box-shadow: var(--shadow-lg);
+  text-align: left;
+}
+
+.quick-form-title {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.quick-form-sub {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.quick-form-sub strong {
+  color: var(--color-primary);
+}
+
+.quick-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.quick-form-grid button {
+  grid-column: span 2;
+  margin-top: 0.5rem;
+}
+
+.quick-success-alert {
+  margin-top: 1.25rem;
+  padding: 1rem 1.25rem;
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  border-radius: var(--radius-md);
+  color: #4ADE80;
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
 /* ==========================================================================
    MODAL DIALOG
    ========================================================================== */
@@ -2486,6 +2543,20 @@ html, body {
 
   .cta-buttons .btn {
     width: 100%;
+  }
+
+  .cta-quick-form-wrapper {
+    padding: 1.25rem 1rem;
+    margin-top: 2rem;
+  }
+
+  .quick-form-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .quick-form-grid button {
+    grid-column: span 1;
   }
 
   /* Modal Dialog */
