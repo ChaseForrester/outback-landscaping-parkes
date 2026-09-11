@@ -20,25 +20,48 @@ function initMobileNav() {
   const menuBtn = document.getElementById('mobile-menu-btn');
   const closeBtn = document.getElementById('mobile-close-btn');
   const mobileNav = document.getElementById('mobile-nav');
+  const backdrop = document.getElementById('nav-backdrop');
   const mobileLinks = document.querySelectorAll('.mobile-link');
 
   if (!menuBtn || !mobileNav) return;
 
   function openMenu() {
     mobileNav.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    mobileNav.setAttribute('aria-hidden', 'false');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('nav-open');
+    if (backdrop) {
+      backdrop.hidden = false;
+      backdrop.classList.add('open');
+    }
   }
 
   function closeMenu() {
     mobileNav.classList.remove('open');
-    document.body.style.overflow = '';
+    mobileNav.setAttribute('aria-hidden', 'true');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('nav-open');
+    if (backdrop) {
+      backdrop.classList.remove('open');
+      backdrop.hidden = true;
+    }
   }
 
-  menuBtn.addEventListener('click', openMenu);
+  menuBtn.addEventListener('click', () => {
+    if (mobileNav.classList.contains('open')) closeMenu();
+    else openMenu();
+  });
   if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+  if (backdrop) backdrop.addEventListener('click', closeMenu);
 
   mobileLinks.forEach(link => {
     link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && mobileNav.classList.contains('open')) {
+      closeMenu();
+    }
   });
 }
 
@@ -205,7 +228,7 @@ function initEstimator() {
       const val = sizeSlider.value;
       const priceText = priceDisplay.textContent;
       const detailsMsg = `Calculated Estimate for: ${config.name} (${val} ${config.unit})\nBallpark Estimate: ${priceText}\nSite Condition: ${document.querySelector('input[name="terrain"]:checked')?.parentElement.textContent.trim()}`;
-      
+
       openModalWithPreset(config.name, detailsMsg);
     });
   }
@@ -410,7 +433,7 @@ function initQuoteModal() {
     document.body.style.overflow = '';
   }
 
-  window.openModalWithPreset = function(serviceVal, detailsVal) {
+  window.openModalWithPreset = function (serviceVal, detailsVal) {
     openModal();
     const serviceSelect = document.getElementById('form-service');
     const detailsInput = document.getElementById('form-details');
@@ -418,8 +441,8 @@ function initQuoteModal() {
     if (serviceSelect && serviceVal) {
       let matched = false;
       for (let i = 0; i < serviceSelect.options.length; i++) {
-        if (serviceSelect.options[i].text.toLowerCase().includes(serviceVal.toLowerCase()) || 
-            serviceSelect.options[i].value.toLowerCase().includes(serviceVal.toLowerCase())) {
+        if (serviceSelect.options[i].text.toLowerCase().includes(serviceVal.toLowerCase()) ||
+          serviceSelect.options[i].value.toLowerCase().includes(serviceVal.toLowerCase())) {
           serviceSelect.selectedIndex = i;
           matched = true;
           break;
@@ -572,7 +595,7 @@ function setupFileUpload(dropzoneId, inputId, previewId) {
   const dropzone = document.getElementById(dropzoneId);
   const input = document.getElementById(inputId);
   const preview = document.getElementById(previewId);
-  if (!dropzone || !input || !preview) return { getFiles: () => [], reset: () => {} };
+  if (!dropzone || !input || !preview) return { getFiles: () => [], reset: () => { } };
 
   let filesList = [];
 
@@ -678,7 +701,7 @@ function setupFileUpload(dropzoneId, inputId, previewId) {
 }
 
 function escapeHtml(str) {
-  return str.replace(/[&<>'"]/g, 
+  return str.replace(/[&<>'"]/g,
     tag => ({
       '&': '&amp;',
       '<': '&lt;',

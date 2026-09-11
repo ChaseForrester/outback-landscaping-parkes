@@ -281,17 +281,20 @@
           <i class="fa-solid fa-phone"></i>
           <span class="header-call-btn__text">Call Derrick</span>
         </a>
-        <button class="btn btn-primary" id="open-quote-modal-nav">
+        <button class="btn btn-primary header-quote-btn" id="open-quote-modal-nav">
           <i class="fa-solid fa-clipboard-list"></i> Get Free Quote
         </button>
-        <button class="mobile-toggle" id="mobile-menu-btn" aria-label="Toggle navigation menu">
+        <button class="mobile-toggle" id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false"
+          aria-controls="mobile-nav">
           <i class="fa-solid fa-bars"></i>
         </button>
       </div>
     </div>
 
+    <div class="nav-backdrop" id="nav-backdrop" hidden></div>
+
     <!-- Mobile Navigation Drawer -->
-    <div class="mobile-nav-drawer" id="mobile-nav">
+    <div class="mobile-nav-drawer" id="mobile-nav" aria-hidden="true">
       <div class="mobile-nav-header">
         <div class="brand-logo">
           <img src="./images/logo.png" alt="Outback Logo" class="brand-logo-img-sm">
