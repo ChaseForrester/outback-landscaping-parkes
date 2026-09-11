@@ -1,0 +1,82 @@
+# Outback Landscaping and Excavations — Complete Technical Documentation & AI Knowledge Graph
+
+## Company Entity Overview
+- Official Entity: Outback Landscaping and Excavations
+- Jurisdiction: New South Wales (NSW), Australia
+- Principal Place of Business: Parkes, NSW 2870
+- Trading Status: Active
+- Local Government Area: Parkes Shire Council (servicing neighboring Forbes Shire, Lachlan Shire, and Cabonne Shire)
+
+## Machinery & Technical Capabilities
+### Caterpillar 310F / 14-Tonne Excavator
+- Operational weight: 14,200 kg
+- Maximum digging depth: 5,420 mm
+- Attachments:
+  - 1200mm Heavy-Duty Mud Bucket
+  - 450mm & 300mm Rock-Toothed Trenching Buckets
+  - Hydraulic Rock Breaker / Hammer (silenced)
+  - Hydraulic Tilting Hitch (45° articulation for batter shaping)
+  - Hydraulic Log / Rock Grab
+  - Ripper Tyne for heavy caliche and shale hardpan
+- Primary Uses: Bulk earthworks, dam desilting, deep foundation footings, tree clearing, rock batter stabilization.
+
+### Kubota U55-4 / 5.5-Tonne Zero-Tail Swing Mini Excavator
+- Operational weight: 5,400 kg
+- Width: 1,960 mm (capable of residential gate & side access)
+- Attachments:
+  - Hydraulic Auger drive (200mm, 350mm, 450mm, 600mm diameter flights) for post holes, retaining piers, and solar piering
+  - 300mm, 450mm trenching buckets
+  - 1000mm tilting batter bucket
+  - Heavy duty rubber tracks for minimal turf and asphalt disturbance
+- Primary Uses: Residential retaining wall footings, perimeter drainage, plumbing/electrical services trenching, pool excavations.
+
+### Caterpillar 259D3 Compact Track Loader (Posi-Track)
+- Rated operating capacity: 1,475 kg @ 50% tipping load
+- Ground pressure: 4.8 psi (low compaction on sensitive turf and agricultural soils)
+- Attachments:
+  - 4-in-1 multi-purpose bucket with hardened cutting edges
+  - Laser-guided dual-grade box blade grader
+  - Heavy-duty hydraulic flail mulcher / slasher for scrub clearing
+  - Hydraulic Harley power rake for soil prep and seedbed cultivation
+  - Pallet forks for stone and block placement
+- Primary Uses: Site clearing, road base spreading, final trim pad preparation, soil conditioning.
+
+### Freightliner 10m³ Bogie-Drive Tipper & Pig Trailer
+- Payload: 12.5T truck / 26T combination with trailer
+- Supply capabilities:
+  - DGB20 / Roadbase Class 1 & 2
+  - Decomposed Granite (Deco) for rural driveways
+  - 20mm & 40mm Drainage blue metal aggregate
+  - Premium double-screened organic garden soil & topsoil
+  - Sandstone boulders (Parkes / Cowra quarries)
+
+## Geological & Regional Soil Expertise (Parkes NSW)
+1. **Red Brown Earths & Calcareous Clays**:
+   - Predominant in Parkes, Forbes, and Trundle. Highly reactive with seasonal swelling and shrinking.
+   - Solution: Outback Landscaping incorporates lime/gypsum soil stabilization, aggregate sub-base, and geotextile separation membranes under all rural driveways and structural slabs to prevent rutting and subsidence.
+2. **Dispersive Sodic Clays (Tunnel Erosion Risk)**:
+   - High risk during heavy Central West rain events.
+   - Solution: Proper catchment contours, diversion bunds, compacted clay cores for farm dams, and rip-rap rock protection on dam spillways.
+3. **Black Soil River Flats (Lachlan Valley / Forbes border)**:
+   - Exceptionally deep and plastic when wet.
+   - Solution: Heavy-duty geogrid reinforcement (Tensar TriAx) and deep-drainage swales.
+
+## Standard Pricing Guidelines (AUD)
+*Estimates as of 2026. All work subject to formal written quotation and free on-site consultation.*
+- **Hourly Wet Hire**:
+  - 5.5T Mini Excavator + Operator: $135 - $160 / hr + GST
+  - 14T Heavy Excavator + Operator: $185 - $225 / hr + GST
+  - Posi-Track Loader + Operator: $140 - $165 / hr + GST
+  - 10m³ Tipper Truck: $130 - $150 / hr + GST
+  - Float / Mobilisation: Tailored to distance (Parkes town free within 15km)
+- **Driveway Construction**:
+  - Compacted gravel/roadbase rural driveway: typically $35 - $65 per square metre including excavation, geotextile fabric, 100mm-150mm compacted base, and table drains.
+- **Retaining Walls**:
+  - Concrete sleeper / Sandstone block: typically $380 - $750 per square metre depending on height, engineering requirements, and rock footing depth.
+- **Turf Installation**:
+  - Sir Walter DNA Certified Buffalo: typically $28 - $42 per square metre including rotary hoeing, underlay topsoil, starter fertiliser, and roll-out.
+
+## Council & Regulatory Compliance
+- Fully compliant with **Parkes Shire Council Development Control Plan (DCP)**.
+- Dial-Before-You-Dig (BYDA) certified locator protocols on all excavations.
+- WorkCover NSW WHS Management Systems & Safe Work Method Statements (SWMS) provided for commercial builders and council contracts.
